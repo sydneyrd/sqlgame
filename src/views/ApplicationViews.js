@@ -2,8 +2,14 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
-
-
+import { GamePage } from "../components/game/Game"
+import { Questions } from "../components/admin.js/Questions"
+import { AccountForm } from "../components/account.js/AccountForm"
+import { Users } from "../components/users/Users"
+import { HomePage } from "../components/home/Home"
+import {UserDetail} from "../components/users/UserDetails"
+import {UserEdit} from "../components/users/UserEdit"
+import {Profile } from "../components/profile/Profile"
 
 
 export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, isActive }) => {
@@ -11,10 +17,14 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
     
     <Route path="/login" element={<Login setToken={setToken} setUserId={setUserId} />} />
     <Route path="/register" element={<Register setToken={setToken} setUserId={setUserId} />} />
+    <Route path="/game" element={<GamePage />} />
     <Route element={<Authorized token={token} isActive={isActive} />}>
+    <Route path="/home" element={<HomePage />} />
+    <Route path="/profile" element={< Profile />} />
       {/* Add Routes here */}
-      {/* <Route path="" element={<HomePage />} />
-      <Route path="/reactions" element={<ReactionList />} /> */}
+      {/* 
+      <Route path="/account" element={<Account />} /> */}
+        
       {/* <Route path="/posts" element={<PostList />} />
       <Route path="/my-posts" element={<MyPost />} />
       <Route path="/posts/create" element={<PostForm />} />
@@ -25,20 +35,22 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
       <Route path="/posts/:postId/add-comment" element={<CommentForm />} />
       <Route path="/posts/:postId/comments/:commentId/edit" element={<CommentEdit />} />
       <Route path="/users/:userId" element={<UserDetail />} /> */}
-      {/* {
+      {
           isStaff === true
             ? <>
-              <Route path="/users">
+            <Route path="/users">
                 <Route index element={<Users />} />
                 <Route path=":userId" element={<UserDetail />} />
                 <Route path=":userId/edit" element={<UserEdit />} />
               </Route>
-              <Route path="/deactivated" element={<DeactivatedUsers />} />
-              <Route path="/categories" element={<CategoriesList />} />
-              <Route path="/tags" element={<TagList />} />
+              <Route path="/questions">
+                <Route index element={<Questions />} />
+                {/* <Route path=":questionId/edit" element={<QuestionEdit />} />
+                <Route path="/add" element={<QuestionForm />} /> */}
+              </Route>
               </>
-            : <Route path="/users" element={<Navigate to="/posts" replace />} />
-        } */}
+            : ""
+        }
     </Route>
   </Routes>
 }
