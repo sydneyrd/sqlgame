@@ -55,7 +55,7 @@ export const updateUserActive = (id, user) => {
 }
 
 
-export const updateUserStaff = (id, user) => {
+export const updateUserAdmin = (id, user) => {
     return fetch(`http://localhost:8000/users/${id}/change_staff_status`, {
         method: "PUT",
         headers: {

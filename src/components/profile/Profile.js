@@ -90,6 +90,7 @@ export const Profile = () => {
                 </div> 
                 
         </article>
-        </section> 
-  )
+        <article></article>
+        </section>
+)
 }

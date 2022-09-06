@@ -1,4 +1,4 @@
-import { getUserById, updateUser } from "../../managers/UserManagers";
+import { getUserById, updateUserAdmin } from "../../managers/UserManagers";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -13,22 +13,12 @@ export const UserDetail = () => {
         getUserById(userId)
             .then(setSlotUser)
     }, [userId])
-
     const staff = (selectedUser) => {
         if (selectedUser?.is_staff === true) {
-            return "Staff"
+            return "Admin"
         }
         else {
-            return "Customer"
-        }
-    }
-
-    const active = (selectedUser) => {
-        if (selectedUser?.active === true) {
-            return "Yes"
-        }
-        else {
-            return "No"
+            return "Player"
         }
     }
     let userName = slotUser?.user?.username
@@ -37,8 +27,13 @@ export const UserDetail = () => {
     let email = slotUser?.user?.email
     let title = slotUser?.title
     let profileType = staff(slotUser?.user)
-    let isActive = active(slotUser?.user)
-
+    const handleUpdate = (id, user) => { 
+        const confirmBox = window.confirm("Confirm: Reactivate User")
+            if  (confirmBox)
+        updateUserAdmin(id, user).then(() => {
+            getUserById(userId).then(setSlotUser)
+        })
+    }
     return( 
         <>
             <div className="user_container">
@@ -50,13 +45,13 @@ export const UserDetail = () => {
                         <div value={slotUser.id}>Email: {email}</div>
                         <div value={slotUser.id}>Title: {title}</div>
                         <div value={slotUser.id}>Profile Type: {profileType}</div>
-                        <div value={slotUser.id}>Is Active? {isActive}</div>
                     </div>
-                    { slotUser?.user?.is_staff ? <button className="button" onClick={() => {
-                        navigate(`/users`)
-                    }}>Back To Users</button> : ""}
+                    { slotUser?.user?.is_staff ? <button className="button" onClick={() => {handleUpdate(userId, slotUser )
+                        
+                    }}>Withdraw Admin Permissions</button> : <button className="button" onClick={() => {handleUpdate(userId, slotUser)}}>Give Admin Permissions</button>}
                 </section>
             </div>
+            <button className="button" onClick={() => { navigate(`/users`)}}>Back to Users</button>
         </>
     )
 
