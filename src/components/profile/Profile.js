@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { updateUser, getUserById } from "../../managers/UserManagers"
+import { updateUser, getUserById, deleteUser } from "../../managers/UserManagers"
 
-export const Profile = () => {
+export const Profile = ({setToken}) => {
     const [slotUser, setSlotUser] = useState({})
     const [payload, setPayload] = useState({
         first_name: slotUser?.user?.first_name,
@@ -36,6 +36,12 @@ export const Profile = () => {
         const userCopy = { ...payload }
         userCopy[event?.target?.name] = event?.target?.value
         setPayload(userCopy)
+    }
+    const handleDelete = (id) => {
+        const confirmBox = window.confirm("Are you sure you want to permanently delete this account?")
+            if (confirmBox)
+            deleteUser(id).then(() => {setToken('')
+            navigate('/login')})
     }
 
 
@@ -90,7 +96,8 @@ export const Profile = () => {
                 </div> 
                 
         </article>
-        <article></article>
+        <article><button className="button" onClick={() => {handleDelete(userId)}}>Delete Account</button></article>
         </section>
+        
 )
 }

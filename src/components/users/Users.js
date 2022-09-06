@@ -53,9 +53,6 @@ export const Users = () => {
                         <Link to={`/users/${slotUser.id}`}>
                             <div value={slotUser.id}>See Details</div>
                         </Link>
-                        <Link to={`/users/${slotUser.id}/edit`}>
-                            <div value={slotUser.id}>Edit User</div>
-                        </Link>
                         
                     </section>
                 })}

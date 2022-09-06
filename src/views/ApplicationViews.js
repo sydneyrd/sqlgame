@@ -8,7 +8,6 @@ import { AccountForm } from "../components/account.js/AccountForm"
 import { Users } from "../components/users/Users"
 import { HomePage } from "../components/home/Home"
 import {UserDetail} from "../components/users/UserDetails"
-import {UserEdit} from "../components/users/UserEdit"
 import {Profile } from "../components/profile/Profile"
 
 
@@ -20,7 +19,7 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
     <Route path="/game" element={<GamePage />} />
     <Route element={<Authorized token={token} isActive={isActive} />}>
     <Route path="/home" element={<HomePage />} />
-    <Route path="/profile" element={< Profile />} />
+    <Route path="/profile" element={< Profile setToken={setToken}/>} />
       {/* Add Routes here */}
       {/* 
       <Route path="/account" element={<Account />} /> */}
@@ -41,7 +40,6 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
             <Route path="/users">
                 <Route index element={<Users />} />
                 <Route path=":userId" element={<UserDetail />} />
-                <Route path=":userId/edit" element={<UserEdit />} />
               </Route>
               <Route path="/questions">
                 <Route index element={<Questions />} />

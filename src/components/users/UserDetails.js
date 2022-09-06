@@ -1,4 +1,4 @@
-import { getUserById, updateUserAdmin } from "../../managers/UserManagers";
+import { getUserById, updateUserAdmin, deleteUser } from "../../managers/UserManagers";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -34,6 +34,12 @@ export const UserDetail = () => {
             getUserById(userId).then(setSlotUser)
         })
     }
+    const handleDelete = (id) => {
+        const confirmBox = window.confirm("Are you sure you want to permanently delete this account?")
+            if (confirmBox)
+            deleteUser(id).then(() => {
+            navigate('/users')})
+    }
     return( 
         <>
             <div className="user_container">
@@ -50,6 +56,7 @@ export const UserDetail = () => {
                         
                     }}>Withdraw Admin Permissions</button> : <button className="button" onClick={() => {handleUpdate(userId, slotUser)}}>Give Admin Permissions</button>}
                 </section>
+                <button className="button" onClick={() => handleDelete(userId)}>Delete User</button>
             </div>
             <button className="button" onClick={() => { navigate(`/users`)}}>Back to Users</button>
         </>
