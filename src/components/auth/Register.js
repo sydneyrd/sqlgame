@@ -1,7 +1,8 @@
 import { useRef } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-// import { registerUser } from "../../managers/AuthManager"
+import { registerUser } from "../../managers/AuthManagers"
+
 
 export const Register = ({ setToken, setUserId }) => {
   const firstName = useRef()
@@ -14,41 +15,41 @@ export const Register = ({ setToken, setUserId }) => {
   const passwordDialog = useRef()
   const navigate = useNavigate()
 
-//   const handleRegister = (e) => {
-//     e.preventDefault()
+  const handleRegister = (e) => {
+    e.preventDefault()
 
-//     if (password.current.value === verifyPassword.current.value) {
-//       const newUser = {
-//         username: username.current.value,
-//         first_name: firstName.current.value,
-//         last_name: lastName.current.value,
-//         email: email.current.value,
-//         password: password.current.value,
-//         bio: bio.current.value,
-//         profile_image_url: ""
-//       }
+    if (password.current.value === verifyPassword.current.value) {
+      const newUser = {
+        username: username.current.value,
+        first_name: firstName.current.value,
+        last_name: lastName.current.value,
+        email: email.current.value,
+        password: password.current.value,
+        bio: bio.current.value,
+        profile_image_url: ""
+      }
 
-//       registerUser(newUser)
-//         .then(res => {
-//           if ("token" in res) {
-//             localStorage.setItem('is_staff', res.is_staff)
-//             localStorage.setItem('is_active', res.is_active)
-//             setToken(res.token)
-//             setUserId(res.user_id)
-//             navigate("/posts")
-//           }
-//         })
-//     } else {
-//       passwordDialog.current.showModal()
-//     }
-//   }
+      registerUser(newUser)
+        .then(res => {
+          if ("token" in res) {
+            localStorage.setItem('is_staff', res.is_staff)
+            localStorage.setItem('is_active', res.is_active)
+            setToken(res.token)
+            setUserId(res.user_id)
+            navigate("/home")
+          }
+        })
+    } else {
+      passwordDialog.current.showModal()
+    }
+  }
 
 
 
 
   return (
     <section className="columns is-centered">
-      <form className="column is-two-thirds" > 
+      <form className="column is-two-thirds" onSubmit={handleRegister} >
         <h1 className="title">Rare Publishing</h1>
         <p className="subtitle">Create an account</p>
         <div className="field">

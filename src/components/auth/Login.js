@@ -1,40 +1,40 @@
 import { useRef, useState } from "react"
-// import { Link, useNavigate } from "react-router-dom"
-// import { loginUser } from "../../managers/AuthManager"
+import { Link, useNavigate } from "react-router-dom"
+import { loginUser } from "../../managers/AuthManagers"
 
 export const Login = ({ setToken, setUserId }) => {
   const username = useRef()
   const password = useRef()
-//   const navigate = useNavigate()
+  const navigate = useNavigate()
   const [isUnsuccessful, setIsUnsuccessful] = useState(false)
 
   
 
-//   const handleLogin = (e) => {
-//     e.preventDefault()
+  const handleLogin = (e) => {
+    e.preventDefault()
 
-//     const user = {
-//       username: username.current.value,
-//       password: password.current.value
-//     }
+    const user = {
+      username: username.current.value,
+      password: password.current.value
+    }
 
-//     loginUser(user).then(res => {
-//       if ("valid" in res && res.valid) {
-//         localStorage.setItem('is_staff', res.is_staff)
-//         localStorage.setItem('is_active', res.is_active)
-//         setToken(res.token)
-//         setUserId(res.user_id)
-//         navigate("/posts")
-//       }
-//       else {
-//         setIsUnsuccessful(true)
-//       }
-//     })
-//   }
+    loginUser(user).then(res => {
+      if ("valid" in res && res.valid) {
+        localStorage.setItem('is_staff', res.is_staff)
+        localStorage.setItem('is_active', res.is_active)
+        setToken(res.token)
+        setUserId(res.user_id)
+        navigate("/home")
+      }
+      else {
+        setIsUnsuccessful(true)
+      }
+    })
+  }
 
   return (
     <section className="columns is-centered">
-      <form className="column is-two-thirds" >
+      <form className="column is-two-thirds" onSubmit={handleLogin}>
         <h1 className="title">Rare Publishing</h1>
         <p className="subtitle">Please sign in</p>
 
@@ -57,6 +57,7 @@ export const Login = ({ setToken, setUserId }) => {
             <button className="button is-link" type="submit" >Submit</button>
           </div>
           <div className="control">
+          <div><Link to="/game">Play as Guest</Link></div>
             {/* <Link to="/register" className="button is-link is-light">Cancel</Link> */}
           </div>
         </div>
@@ -64,6 +65,7 @@ export const Login = ({ setToken, setUserId }) => {
           isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
         }
       </form>
+      
     </section>
   )
 }

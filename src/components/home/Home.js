@@ -16,7 +16,7 @@ export const HomePage = () => {
   return <section className="section">
     <article className="panel is-info">
       <p className="panel-heading">
-        Posts
+        HERE IS THE HOME PAGE FOR USERS AND MAYBE ADMIN TOO IDK
       </p>
 
 

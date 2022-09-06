@@ -22,6 +22,7 @@ export const LuckyQuery = () => {
 
   return <>
     <NavBar token={token} setToken={setToken} isStaff={localStorage.getItem("is_staff")==="true"} isActive={localStorage.getItem("is_active")==="true"} />
-    <ApplicationViews token={token} setToken={setToken} setUserId={setUserId} userId={userId} isStaff={localStorage.getItem("is_staff")==="true"} isActive={localStorage.getItem("is_active")==="true"}/>
+    <ApplicationViews token={token} setToken={setToken} setUserId={setUserId} userId={userId} isStaff={localStorage.getItem("is_staff")==="true"} 
+    isActive={localStorage.getItem("is_active")==="true"}/>
   </>
 }
