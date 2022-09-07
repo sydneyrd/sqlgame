@@ -3,12 +3,14 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
 import { GamePage } from "../components/game/Game"
-import { Questions } from "../components/admin.js/Questions"
+import { Questions } from "../components/questions/Question"
 import { AccountForm } from "../components/account.js/AccountForm"
 import { Users } from "../components/users/Users"
 import { HomePage } from "../components/home/Home"
 import {UserDetail} from "../components/users/UserDetails"
 import {Profile } from "../components/profile/Profile"
+import {QuestionForm} from "../components/questions/QuestionForm"
+import {QuestionDetails} from "../components/questions/QuestionDetails"
 
 
 export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, isActive }) => {
@@ -43,8 +45,10 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
               </Route>
               <Route path="/questions">
                 <Route index element={<Questions />} />
-                {/* <Route path=":questionId/edit" element={<QuestionEdit />} />
-                <Route path="/add" element={<QuestionForm />} /> */}
+                  <Route path="/questions/edit/:questionId" element={<QuestionForm /> } />
+                  <Route path="/questions/:questionId" element={< QuestionDetails />} />
+                  {/* <Route path=":questionId/edit" element={<QuestionEdit />} />  */}
+                {/* <Route path="/add" element={<QuestionForm />} /> */} 
               </Route>
               </>
             : ""
