@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { createQuestion, getQuestionById, updateQuestion } from "../../managers/QuestionManagers"
+import { createQuestion } from "../../managers/QuestionManagers"
 import { getAllSolutions } from "../../managers/SolutionManagers"
 
-export const QuestionForm = () => {
-
+export const QuestionAdd = ({loadQuestions}) => {
+    const [question, setQuestion] = useState({}) 
     const [solutions, setSolutions] = useState([])
-    const [question, setQuestion] = useState({})
     const [solutionsForQuestion, setSolutionForQuestion] = useState([])
     let navigate = useNavigate()
     const [difficulty, setDifficulty] = useState(false)
-    const { questionId } = useParams()
 
     useEffect(() => {
-        getAllSolutions().then(solutionsData => setSolutions(solutionsData)).then(
-            getQuestionById(questionId).then(questionData => setQuestion(questionData))
-        )
+        getAllSolutions().then(solutionsData => setSolutions(solutionsData))
     }, [])
     const updateSolutions = (solutionId) => {
         let solutionsCopy = [...solutionsForQuestion]
@@ -34,8 +30,8 @@ export const QuestionForm = () => {
             ...question,
             solution: solutionsForQuestion
         }
-        updateQuestion(questionId, solutionData).then(() => {
-            navigate(`/questions`)
+        createQuestion(solutionData).then(() => {
+            loadQuestions()
         })
     }
     const handleChange = (event) => {
@@ -52,7 +48,7 @@ export const QuestionForm = () => {
                         <label htmlFor="question" className="question">Question: </label>
                         <div className="control">
                             <div className="control">
-                                <textarea
+                                <textarea required
                                     className="textarea"
                                     name="label"
                                     value={question?.label}
@@ -65,7 +61,7 @@ export const QuestionForm = () => {
                         <label htmlFor="difficulty" className="label">Difficulty: </label>
                         <div className="control">
                             <div className="select">
-                                <input type="number" min="1" max="10" name="difficulty"
+                                <input type="number" required min="1" max="10" name="difficulty"
                                     value={question?.difficulty}
                                     onChange={handleChange} />
                                 {/* //this field might be multiselectable for drop downs maybe easier */}
@@ -78,7 +74,7 @@ export const QuestionForm = () => {
                                             <div className="field" key={`sol--${sol.id}`}>
                                                 <div className="control">
                                                     <label className="checkbox" htmlFor={sol?.label}>
-                                                        <input type="checkbox" name={sol?.label}
+                                                        <input required type="checkbox" name={sol?.label}
                                                             checked={solutionsForQuestion.includes(sol.id)}
                                                             onChange={() => {
                                                                 updateSolutions(sol.id)

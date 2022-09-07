@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllQuestions, getQuestionsByDifficulty, getQuestionsBySearch} from "../../managers/QuestionManagers"
 import { QuestionList } from "./QuestionList"
+import { QuestionAdd } from "./QuestionAdd"
 
 
 export const Questions = () => {
@@ -125,6 +126,7 @@ export const Questions = () => {
             <div className="panel-block">
                 <QuestionList questions={filteredQuestions} />
             </div>
+            <div><QuestionAdd loadQuestions={loadQuestions} /></div>
         </article>
     </section>
 }
