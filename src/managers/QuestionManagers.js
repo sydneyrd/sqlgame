@@ -36,8 +36,8 @@ export const getAllQuestions = () => {
       body: JSON.stringify(question)
     })
   }
-  export const getQuestionsByDifficulty = (id) => {
-    return fetch(`http://localhost:8000/questions?difficulty=${id}`, {
+  export const getQuestionsByDifficulty = (difficulty) => {
+    return fetch(`http://localhost:8000/questions?difficulty=${difficulty}`, {
       headers: {
         'Authorization': `Token ${localStorage.getItem('auth_token')}`
       }

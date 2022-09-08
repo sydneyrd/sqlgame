@@ -26,6 +26,8 @@ export const QuestionDetails = () => {
     // }, [questionId])
 
     const handleDelete = (questionId) => {
+        const confirmBox = window.confirm("Are you sure you want to permanently delete this solution?   This action cannot be undone")
+        if (confirmBox)
         deleteQuestion(questionId).then(() => {
             navigate('/questions')
         })

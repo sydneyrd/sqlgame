@@ -18,7 +18,7 @@ export const createSolution = (solution) => {
     })
         .then(res => res.json())
 }
-export const getSolutionById = id => {
+export const getSolutionById = (id) => {
     return fetch(`http://localhost:8000/solutions/${id}`, {
         headers: {
             'Authorization': `Token ${localStorage.getItem('auth_token')}`
@@ -36,3 +36,11 @@ export const updateSolution = (id, solution) => {
         body: JSON.stringify(solution)
     })
 }
+export const deleteSolution = (solutionId) => {
+    return fetch(`http://localhost:8000/solutions/${solutionId}`, {
+      method: "DELETE",
+      headers: {
+        'Authorization': `Token ${localStorage.getItem('auth_token')}`
+      }
+    })
+  }
