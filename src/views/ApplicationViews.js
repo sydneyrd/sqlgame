@@ -11,6 +11,8 @@ import {UserDetail} from "../components/users/UserDetails"
 import {Profile } from "../components/profile/Profile"
 import {QuestionForm} from "../components/questions/QuestionForm"
 import {QuestionDetails} from "../components/questions/QuestionDetails"
+import { SolutionList } from "../components/questions/SolutionList"
+import {SolutionEdit} from "../components/questions/SolutionEdit"
 
 
 export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, isActive }) => {
@@ -22,6 +24,8 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
     <Route element={<Authorized token={token} isActive={isActive} />}>
     <Route path="/home" element={<HomePage />} />
     <Route path="/profile" element={< Profile setToken={setToken}/>} />
+    <Route path='/solutions' index element={< SolutionList />} />
+      <Route path='/solutions/edit/:solutionId' element={< SolutionEdit />} />
       {/* Add Routes here */}
       {/* 
       <Route path="/account" element={<Account />} /> */}

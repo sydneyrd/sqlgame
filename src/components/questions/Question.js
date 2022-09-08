@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllQuestions, getQuestionsByDifficulty, getQuestionsBySearch} from "../../managers/QuestionManagers"
 import { QuestionList } from "./QuestionList"
 import { QuestionAdd } from "./QuestionAdd"
+import { Solution } from "./Solution"
 
 
 export const Questions = () => {
@@ -124,7 +125,7 @@ export const Questions = () => {
             </div>
 
             <div className="panel-block">
-                <QuestionList questions={filteredQuestions} />
+                <QuestionList loadQuestions={loadQuestions} questions={filteredQuestions} />
             </div>
             <div><QuestionAdd loadQuestions={loadQuestions} /></div>
         </article>

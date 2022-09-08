@@ -40,7 +40,8 @@ export const NavBar = ({ isStaff, token, setToken }) => {
                     isStaff
                     ?<>
                     <Link to="/questions" className="navbar-item">Question Management</Link>  
-                    <Link to="/users" className="navbar-item">Users</Link>
+                    <Link to="/users" className="navbar-item">User Management</Link>
+                    <Link to="/solutions" className="navbar-item">Solution Management</Link>  
                     </>
                     : ""
                   }     
