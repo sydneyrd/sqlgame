@@ -11,7 +11,7 @@
 import { useState } from "react"
 
 export const GameQuestions = ({ questions, currentQuestion }) => {
-const [usedQuestions, setUsedQuestions] = useState([])
+// const [usedQuestions, setUsedQuestions] = useState([]) filter these out of available q
 
  
 

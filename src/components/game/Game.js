@@ -20,6 +20,8 @@ export const GamePage = () => {
     const [difficulty, setDifficulty] = useState(0)
     const [score, setScore] = useState(0)
     const [sessionScore, setSessionScore] = useState(0)
+    const [correctSolutions, setCorrectSolutions] = useState([])
+    const [usedQuestions, setUsedQuestions] = useState([])
 
     const userId = localStorage.getItem('user_id')
     const loadUser = () => getUserById(userId).then(data => setUser(data))
@@ -27,27 +29,25 @@ export const GamePage = () => {
     const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data))
    //convert the score into a string?  get only the first number, use that to set difficulty
    //useeffect watches score on appropriate increase get appropriate questions and send score here?  not sure
-    //maybe better way to get just the first integer
-    
+    //maybe better way to get just the first integer would need to max out at 10, check to see if maxed before comparison so if your score is 1000 you don't get level 1 questions
+
     useEffect(() => {
         loadUser(userId).then(() => {
         }
-        ).then(() => {loadQuestions(1)} ///duh no diff on user, only on questions.  need to grab the user score first to determine difficulty.  hm.   maybe give a test user a score
+        ).then(() => {loadQuestions(1)} ///duh no diff on user, only on questions.  need to grab the user score first to determine difficulty. 
         ).then(() => {loadSolutions()}
         ).then(() => {setScore(user?.score)})
+        
         }, [])
         function random_question(questions)
         {return questions[Math.floor(Math.random()*questions.length)];}
         const currentQuestion = random_question(questions)
-    
-    
-    
 
     return <><h1>Game goes here bb</h1>
 <div>
     <GameQuestions questions={questions} currentQuestion={currentQuestion}/></div>
     <div>
-    <GameInput solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution}/></div></>
+    <GameInput correctSolutions={correctSolutions} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution}/></div></>
 }
 
 

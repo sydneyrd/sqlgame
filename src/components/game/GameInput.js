@@ -9,7 +9,7 @@
 //new input options are displayed
 
 
-export const GameInput = ({ solutionList, chosenSolution, setChosenSolution }) => {
+export const GameInput = ({ solutionList, chosenSolution, setChosenSolution, correctSolutions }) => {
     
     const handleSelect = (evt) => {
         let sol = evt.target.value
@@ -26,13 +26,23 @@ export const GameInput = ({ solutionList, chosenSolution, setChosenSolution }) =
         }
         setChosenSolution(solutionsCopy)
     }
+        ///get the correct solutions.   find how many there are, add the amount of random solutions to get the full number of options.  6?
+        //map the newly created array of options containing the correct and random incorrect answers
+
+
+    function getRandomSolutions(arr, num) {
+        const shuffled = [...arr].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, num);}
+    
+        const randomSolutions = getRandomSolutions(solutionList, 2)
+    
     
     
     
     
     return <>GAME INPUTS DISPLAY
-        {solutionList.map((sol) => {
-            { return <><button onClick={(evt) => {handleSelect(evt)}}value={sol.id}> {sol.label}</button></> }
+        {randomSolutions.map((sol) => {
+            { return <><button onClick={(evt) => {handleSelect(evt)}} value={sol.id}> {sol.label}</button></> }
         })}</>
 
 }
