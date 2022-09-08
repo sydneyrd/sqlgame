@@ -13,42 +13,45 @@ import { getAllSolutions } from "../../managers/SolutionManagers"
 
 export const GamePage = () => {
     const [questions, setQuestions] = useState([])
-    const [filteredQuestions, setFiltered] = useState([])
-    const [chosenSolution, setChosenSolution] = useState(0)
+    // const [filteredQuestions, setFiltered] = useState([]) could filter the results by difficulty instead of fetching them
+    const [chosenSolution, setChosenSolution] = useState([])
     const [solutionList, setSolutionList] = useState([])
     const [user, setUser] = useState({})
+    const [difficulty, setDifficulty] = useState(0)
+    const [score, setScore] = useState(0)
+    const [sessionScore, setSessionScore] = useState(0)
 
     const userId = localStorage.getItem('user_id')
     const loadUser = () => getUserById(userId).then(data => setUser(data))
     const loadQuestions = (diff) => getQuestionsByDifficulty(diff).then(data => setQuestions(data))
-    const loadSolutions = () => getAllSolutions.then(data => setSolutionList(data))
+    const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data))
+   //convert the score into a string?  get only the first number, use that to set difficulty
+   //useeffect watches score on appropriate increase get appropriate questions and send score here?  not sure
+    //maybe better way to get just the first integer
+    
     useEffect(() => {
         loadUser(userId).then(() => {
         }
-        ).then(() => {loadQuestions(user.difficulty)}
-        ).then(() => {loadSolutions()})
-        
-        
-        
-    }, [])
-
+        ).then(() => {loadQuestions(1)} ///duh no diff on user, only on questions.  need to grab the user score first to determine difficulty.  hm.   maybe give a test user a score
+        ).then(() => {loadSolutions()}
+        ).then(() => {setScore(user?.score)})
+        }, [])
+        function random_question(questions)
+        {return questions[Math.floor(Math.random()*questions.length)];}
+        const currentQuestion = random_question(questions)
+    
+    
+    
 
     return <><h1>Game goes here bb</h1>
-
-    <GameQuestions questions={questions} />
-    <GameInput solutionList={solutionList} /></>
+<div>
+    <GameQuestions questions={questions} currentQuestion={currentQuestion}/></div>
+    <div>
+    <GameInput solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution}/></div></>
 }
 
 
 
-
-//get questions by difficulty and all solutions
-//pass to input and questions
-
-
-
-
-//pass down to game input and questions
 //display inputs and questions (questions one at a time)// 
 //correctly answered questions should be removed from the pool of available questions
 //after 10 correct questions the difficulty should be increased
