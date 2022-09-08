@@ -50,8 +50,8 @@ export const GamePage = () => {
     <GameInput correctSolutions={correctSolutions} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution}/></div></>
 }
 
-
-
+///get difficulty from score change score into string, take first character and use that to get the difficulty, not session score, but overall score
+//get maps on the same difficulty
 //display inputs and questions (questions one at a time)// 
 //correctly answered questions should be removed from the pool of available questions
 //after 10 correct questions the difficulty should be increased
