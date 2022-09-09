@@ -10,12 +10,12 @@
 //on 10 correct answers the difficulty should increase, get new questions
 import { useState } from "react"
 
-export const GameQuestions = ({ questions, currentQuestion }) => {
+export const GameQuestions = ({ questions, question }) => {
 // const [usedQuestions, setUsedQuestions] = useState([]) filter these out of available q
 
  
 
     return <>HERE IS WHERE GAME QUESTIONS WILL BE DISPLAYED
- <><div>{currentQuestion?.label}</div></>
+ <><div>{question?.label}</div></>
     </>
 }
