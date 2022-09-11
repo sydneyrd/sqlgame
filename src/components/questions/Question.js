@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllQuestions, getQuestionsByDifficulty, getQuestionsBySearch} from "../../managers/QuestionManagers"
+import { getAllQuestions, getQuestionsBySearch} from "../../managers/QuestionManagers"
 import { QuestionList } from "./QuestionList"
 import { QuestionAdd } from "./QuestionAdd"
 import { Solution } from "./Solution"
