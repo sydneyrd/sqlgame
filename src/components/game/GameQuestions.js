@@ -10,7 +10,7 @@
 //on 10 correct answers the difficulty should increase, get new questions
 import { useState } from "react"
 
-export const GameQuestions = ({ questions, question }) => {
+export const GameQuestions = ({ question }) => {
 // const [usedQuestions, setUsedQuestions] = useState([]) filter these out of available q
 
  

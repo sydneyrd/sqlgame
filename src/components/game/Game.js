@@ -17,6 +17,7 @@ export const GamePage = () => {
     const [correctSolutions, setCorrectSolutions] = useState([])
     const [usedQuestions, setUsedQuestions] = useState([])
     const [question, setCurrentQuestion] = useState([])
+    // const [solutionOptions, setSolutionOptions] = useState([])
     const userId = localStorage.getItem('user_id')
     const loadUser = () => getUserById(userId).then(data => setUser(data))
     const loadQuestions = (diff) => getQuestionsByDifficulty(diff).then(data => setQuestions(data))
@@ -38,7 +39,7 @@ export const GamePage = () => {
     useEffect(() => {
         setCurrentQuestion(currentQuestion)
         const Arr = []
-        currentQuestion?.solution.map(t => Arr.push(t?.id))
+        currentQuestion?.solution.map(t => Arr.push(t))
         setCorrectSolutions(Arr)
     }, [currentQuestion])
 
@@ -48,7 +49,7 @@ export const GamePage = () => {
         <div>
             <GameInput correctSolutions={correctSolutions} currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
 }
-
+// setSolutionOptions={setSolutionOptions} solutionOptions={solutionOptions} 
 // /get difficulty from score change score into string, take first character and use that to get the difficulty, not session score, but overall score
 // get maps on the same difficulty
 // display inputs and questions (questions one at a time)// 
