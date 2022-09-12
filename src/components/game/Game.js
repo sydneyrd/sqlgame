@@ -7,7 +7,6 @@ import { getAllSolutions } from "../../managers/SolutionManagers"
 
 export const GamePage = () => {
     const [questions, setQuestions] = useState([])
-    // const [filteredQuestions, setFiltered] = useState([]) could filter the results by difficulty instead of fetching them
     const [chosenSolution, setChosenSolution] = useState([])
     const [solutionList, setSolutionList] = useState([])
     const [user, setUser] = useState({})
@@ -27,7 +26,7 @@ export const GamePage = () => {
     //convert the score into a string?  get only the first number, use that to set difficulty
     //useeffect watches score on appropriate increase get appropriate questions and send score here?  not sure
     //maybe better way to get just the first integer would need to max out at 10, check to see if maxed before comparison so if your score is 1000 you don't get level 1 questions
-
+// useEffect(() => {}, [])  // we need to check for a complete set of correct answers, 
 
     useEffect(() => {
         loadUser(userId).then(() => {
