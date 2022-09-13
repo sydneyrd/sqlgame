@@ -9,8 +9,9 @@
 //new input options are displayed
 import { useEffect, useState, useRef } from "react"
 
-export const GameInput = ({ setCompletedQuestion, solutionList, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+export const GameInput = ({ setCompletedQuestion, solutionList, completedQuestion, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
   const solutionRef = useRef([])
+
     function getRandomSolutions(arr, num) {
         const shuffled = [...arr].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);}
@@ -20,7 +21,7 @@ export const GameInput = ({ setCompletedQuestion, solutionList, setSolutionOptio
     const randomSolutions = getRandomSolutions(optArr, extraSol); //creates a randomized array of the incorrect solutions, only returns enough to create 6 options - yes
     const createOptions = randomSolutions.concat(correctSolutions);//join the new extra option incorrect array, and the correct array - yes
     const shuffledOptions = getRandomSolutions(createOptions, 6);//shuffle the complete array of 6 including all the correct sol and extra incorrect as needed for 6
-
+    solutionRef.current = chosenSolution 
     const handleSelect = (click, obj) => {
         click.preventDefault()
         updateSolutions(obj)
@@ -35,17 +36,19 @@ export const GameInput = ({ setCompletedQuestion, solutionList, setSolutionOptio
         }
         setChosenSolution(solutionsCopy)
     }
-    useEffect(() => {
-      solutionRef.current = chosenSolution 
-        let arr1 = solutionRef.current
-        let arr2 = [...correctSolutions]
-        checkSolutions(arr1, arr2)
-    }, []) 
+
+    // useEffect(() => {  
+    //     let arr1 = solutionRef.current
+    //     let arr2 = [...correctSolutions]
+    //     checkSolutions(arr1, arr2)
+    // }, []) 
 
 function checkSolutions(array1, array2){
    if (areEqual(array1, array2)){
     window.alert('yes') 
-    setCompletedQuestion(true)
+    let correct = completedQuestion
+    setCompletedQuestion(!correct)
+    // solutionRef.current = []
    } else {}
 }
 
@@ -61,12 +64,9 @@ function checkSolutions(array1, array2){
          return false;
        }
 
-
-
-
-// function handleSubmit()
+       
     return <>GAME INPUTS DISPLAY
         {shuffledOptions.map((sol) => {
-            { return <><button onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
-        })}<div><button>Submit</button></div></>
+            { return <><button ref={solutionRef} onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
+        })}<div><button onClick={() => checkSolutions(solutionRef, correctSolutions)}>Submit</button></div></>
       }
