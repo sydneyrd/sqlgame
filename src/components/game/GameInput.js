@@ -9,8 +9,8 @@
 //new input options are displayed
 import { useEffect, useState, useRef } from "react"
 
-export const GameInput = ({ setCompletedQuestion, solutionList, completedQuestion, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
-  const solutionRef = useRef([])
+export const GameInput = ({ setCompletedQuestion, solutionRef, solutionList, completedQuestion, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+  
 
     function getRandomSolutions(arr, num) {
         const shuffled = [...arr].sort(() => 0.5 - Math.random());

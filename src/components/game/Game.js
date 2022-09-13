@@ -8,6 +8,7 @@ import { getAllSolutions } from "../../managers/SolutionManagers"
 export const GamePage = () => {
     const questRef = useRef({})
     const solveRef = useRef([])
+    const solutionRef = useRef([])
     const [questions, setQuestions] = useState([])
     const [chosenSolution, setChosenSolution] = useState([])
     const [solutionList, setSolutionList] = useState([])
@@ -37,15 +38,11 @@ export const GamePage = () => {
         ).then(() => { loadQuestions(1) } ///duh no diff on user, only on questions.  need to grab the user score first to determine difficulty. 
         ).then(() => { loadSolutions() }
         )
-        let qS = [...questions ]
+        const qS = [...questions ]
         const currentQ = random_question(qS)
         setCurrentQuestion(currentQ)
         console.log(question) 
     }, [])
-    useEffect(() => {
-        
-    }, [])
-
     useEffect(() => {
         let qS = [...questions ]
         let currentQuestion = random_question(qS)
@@ -61,10 +58,10 @@ export const GamePage = () => {
         <div>
             <GameQuestions questRef={questRef} questions={questions} question={question} /></div>
         <div>
-            <GameInput completedQuestion={completedQuestion}setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} 
+            <GameInput solutionRef={solutionRef} completedQuestion={completedQuestion}setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} 
             question={question} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
 }
-// setSolutionOptions={setSolutionOptions} solutionOptions={solutionOptions} 
+
 // /get difficulty from score change score into string, take first character and use that to get the difficulty, not session score, but overall score
 // get maps on the same difficulty
 // display inputs and questions (questions one at a time)// 
