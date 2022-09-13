@@ -7,9 +7,10 @@
 //
 //when new question is presented
 //new input options are displayed
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
-export const GameInput = ({ solutionList, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+export const GameInput = ({ setCompletedQuestion, solutionList, setSolutionOptions, solutionOptions,  currentQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+  const solutionRef = useRef([])
     function getRandomSolutions(arr, num) {
         const shuffled = [...arr].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);}
@@ -35,14 +36,16 @@ export const GameInput = ({ solutionList, setSolutionOptions, solutionOptions,  
         setChosenSolution(solutionsCopy)
     }
     useEffect(() => {
-        let arr1 = [...chosenSolution]
+      solutionRef.current = chosenSolution 
+        let arr1 = solutionRef.current
         let arr2 = [...correctSolutions]
         checkSolutions(arr1, arr2)
     }, []) 
 
 function checkSolutions(array1, array2){
    if (areEqual(array1, array2)){
-    window.alert('yes')
+    window.alert('yes') 
+    setCompletedQuestion(true)
    } else {}
 }
 
@@ -66,5 +69,4 @@ function checkSolutions(array1, array2){
         {shuffledOptions.map((sol) => {
             { return <><button onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
         })}<div><button>Submit</button></div></>
-
-}
+      }

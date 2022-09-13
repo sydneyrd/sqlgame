@@ -16,13 +16,14 @@ export const GamePage = () => {
     const [correctSolutions, setCorrectSolutions] = useState([])
     const [usedQuestions, setUsedQuestions] = useState([])
     const [question, setCurrentQuestion] = useState([])
-    // const [solutionOptions, setSolutionOptions] = useState([])
+    const [completedQuestion, setCompletedQuestion] = useState(false)
     const userId = localStorage.getItem('user_id')
     const loadUser = () => getUserById(userId).then(data => setUser(data))
     const loadQuestions = (diff) => getQuestionsByDifficulty(diff).then(data => setQuestions(data))
     const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data))
     const random_question = (questions) => { return questions[Math.floor(Math.random() * questions.length)]; }
-    const currentQuestion = random_question(questions)
+    const currentQ = random_question(questions)
+    
     //convert the score into a string?  get only the first number, use that to set difficulty
     //useeffect watches score on appropriate increase get appropriate questions and send score here?  not sure
     //maybe better way to get just the first integer would need to max out at 10, check to see if maxed before comparison so if your score is 1000 you don't get level 1 questions
@@ -36,13 +37,24 @@ export const GamePage = () => {
         )
     }, [])
 
+
     useEffect(() => {
+        const currentQ = random_question(questions)
+        setCurrentQuestion(currentQ)
+
+    }, [])
+
+    useEffect(() => {
+
+const currentQuestion = random_question(questions)
         setCurrentQuestion(currentQuestion)
         const Arr = []
         currentQuestion?.solution.map(t => Arr.push(t))
         setCorrectSolutions(Arr)
-    }, [chosenSolution])
+    }, [completedQuestion])
 
+
+console.log(question)
 // useEffect(() => {
 //         if (areEqual(chosenSolution, correctSolutions) === true){
 //        window.alert('correct')}
@@ -67,7 +79,7 @@ export const GamePage = () => {
         <div>
             <GameQuestions questions={questions} question={question} /></div>
         <div>
-            <GameInput correctSolutions={correctSolutions} currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
+            <GameInput setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} question={question} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
 }
 // setSolutionOptions={setSolutionOptions} solutionOptions={solutionOptions} 
 // /get difficulty from score change score into string, take first character and use that to get the difficulty, not session score, but overall score
