@@ -24,7 +24,6 @@ export const GameInput = ({ solutionList, setSolutionOptions, solutionOptions,  
         click.preventDefault()
         updateSolutions(obj)
     }  
-
     const updateSolutions = (obj) => {
         let solutionsCopy = [...chosenSolution]
         const index = solutionsCopy.indexOf(obj.id)
@@ -35,6 +34,31 @@ export const GameInput = ({ solutionList, setSolutionOptions, solutionOptions,  
         }
         setChosenSolution(solutionsCopy)
     }
+    useEffect(() => {
+        let arr1 = [...chosenSolution]
+        let arr2 = [...correctSolutions]
+        checkSolutions(arr1, arr2)
+    }, []) 
+
+function checkSolutions(array1, array2){
+   if (areEqual(array1, array2)){
+    window.alert('yes')
+   } else {}
+}
+
+       function areEqual(array1, array2) {
+         if (array1.length === array2.length) {
+           return array1.every((element, index) => {
+             if (element === array2[index]) {
+               return true;
+             }
+       return false;
+           });
+         }
+         return false;
+       }
+
+
 
 
 // function handleSubmit()

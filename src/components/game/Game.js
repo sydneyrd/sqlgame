@@ -35,12 +35,33 @@ export const GamePage = () => {
         ).then(() => { loadSolutions() }
         )
     }, [])
+
     useEffect(() => {
         setCurrentQuestion(currentQuestion)
         const Arr = []
         currentQuestion?.solution.map(t => Arr.push(t))
         setCorrectSolutions(Arr)
-    }, [currentQuestion])
+    }, [chosenSolution])
+
+// useEffect(() => {
+//         if (areEqual(chosenSolution, correctSolutions) === true){
+//        window.alert('correct')}
+//        else {
+//        window.alert('incorrect')}
+//        }, []) 
+
+//        function areEqual(array1, array2) {
+//          if (array1.length === array2.length) {
+//            return array1.every((element, index) => {
+//              if (element === array2[index]) {
+//                return true;
+//              }
+//        return false;
+//            });
+//          }
+//          return false;
+//        }
+
 
     return <><h1>Game goes here bb</h1>
         <div>
