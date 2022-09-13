@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
-import { GamePage } from "../components/game/Game"
+import { GameParent } from "../components/game/GameParent"
 import { Questions } from "../components/questions/Question"
 import { AccountForm } from "../components/account.js/AccountForm"
 import { Users } from "../components/users/Users"
@@ -20,12 +20,11 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
     
     <Route path="/login" element={<Login setToken={setToken} setUserId={setUserId} />} />
     <Route path="/register" element={<Register setToken={setToken} setUserId={setUserId} />} />
-    <Route path="/game" element={<GamePage />} />
+    <Route path="/game" element={<GameParent />} />
     <Route element={<Authorized token={token} isActive={isActive} />}>
     <Route path="/home" element={<HomePage />} />
     <Route path="/profile" element={< Profile setToken={setToken}/>} />
-    <Route path='/solutions' index element={< SolutionList />} />
-      <Route path='/solutions/edit/:solutionId' element={< SolutionEdit />} />
+    
       {/* Add Routes here */}
       {/* 
       <Route path="/account" element={<Account />} /> */}
@@ -43,6 +42,8 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
       {
           isStaff === true
             ? <>
+            <Route path='/solutions' index element={< SolutionList />} />
+                <Route path='/solutions/edit/:solutionId' element={< SolutionEdit />} />
             <Route path="/users">
                 <Route index element={<Users />} />
                 <Route path=":userId" element={<UserDetail />} />

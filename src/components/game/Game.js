@@ -9,24 +9,25 @@ export const GamePage = () => {
     const questRef = useRef({})
     const solveRef = useRef([])
     const solutionRef = useRef([])
-    const [questions, setQuestions] = useState([])
-    const [chosenSolution, setChosenSolution] = useState([])
-    const [solutionList, setSolutionList] = useState([])
-    const [user, setUser] = useState({})
-    const [difficulty, setDifficulty] = useState(0)
-    const [score, setScore] = useState(0)
-    const [sessionScore, setSessionScore] = useState(0)
-    const [correctSolutions, setCorrectSolutions] = useState([])
-    const [usedQuestions, setUsedQuestions] = useState([])
-    const [question, setCurrentQuestion] = useState({})
-    const [completedQuestion, setCompletedQuestion] = useState(false)
-    const userId = localStorage.getItem('user_id')
-    const loadUser = () => getUserById(userId).then(data => setUser(data))
-    const loadQuestions = (diff) => getQuestionsByDifficulty(diff).then(data => setQuestions(data))
-    const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data))
-    const random_question = (questions) => { return questions[Math.floor(Math.random() * questions.length)]; }
+    const [questions, setQuestions] = useState([])//getting
+    const [chosenSolution, setChosenSolution] = useState([])//no input on render
+    const [solutionList, setSolutionList] = useState([])//getting
+    const [user, setUser] = useState({})//getting
+    // const [difficulty, setDifficulty] = useState(0)//no func written
+    // const [score, setScore] = useState(0)//no func written
+    // const [sessionScore, setSessionScore] = useState(0)//no func written
+    const [correctSolutions, setCorrectSolutions] = useState([])//not loading on rerender
+    // const [usedQuestions, setUsedQuestions] = useState([])//no func
+    const [question, setCurrentQuestion] = useState({})//not loading on rerender
+    const [completedQuestion, setCompletedQuestion] = useState(false)// not functioning
+    const userId = localStorage.getItem('user_id')//is functioning
+    const loadUser = (id) => getUserById(id).then(data => setUser(data))//getting
+    const loadQuestions = (diff) => getQuestionsByDifficulty(diff).then(data => setQuestions(data))//getting
+    const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data))//getting
+    const random_question = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
     
-    
+    console.log(random_question(questions))//seems to work
+
     //convert the score into a string?  get only the first number, use that to set difficulty
     //useeffect watches score on appropriate increase get appropriate questions and send score here?  not sure
     //maybe better way to get just the first integer would need to max out at 10, check to see if maxed before comparison so if your score is 1000 you don't get level 1 questions
@@ -41,17 +42,17 @@ export const GamePage = () => {
         const qS = [...questions ]
         const currentQ = random_question(qS)
         setCurrentQuestion(currentQ)
-        console.log(question) 
+        console.log(question) ///not logging//wait logging sometimes
     }, [])
     useEffect(() => {
-        let qS = [...questions ]
+        let qS = [ ...questions ]
         let currentQuestion = random_question(qS)
         setCurrentQuestion(currentQuestion)
         let Arr = []
         currentQuestion?.solution.map(t => Arr.push(t))
         solveRef.current = Arr
         setCorrectSolutions(Arr)
-        console.log(currentQuestion)
+        console.log(currentQuestion)//is logging
     }, [completedQuestion])
 
     return <><h1>Game goes here bb</h1>
