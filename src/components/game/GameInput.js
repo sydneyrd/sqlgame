@@ -39,12 +39,9 @@ export const GameInput = ({ setCompletedQuestion, choiceRef, solutionList, solve
         choiceRef.current = chosenSolution 
     }
 
-function checkSolutions(array1, array2){
-  setCompletedQuestion(areEqual(array1, array2))
-}
        function areEqual(array1, array2) {
-        // array1?.sort();
-        // array2?.sort();
+        array1?.sort();
+        array2?.sort();
          if (array1.length === array2.length) {
            return array1.every((element, index) => {
              if (element === array2[index]) {
@@ -56,13 +53,14 @@ function checkSolutions(array1, array2){
          return false;
        }
 
-
        useEffect(() => {
-const check = checkSolutions(chosenSolution, correctSolutions)
-
-      setCompletedQuestion(check)
-              
-         }, [choiceRef])
+        if (areEqual(chosenSolution, correctSolutions))
+        {setCompletedQuestion(true)
+      console.log('yes') } else {
+        setCompletedQuestion(false)
+        console.log('no')
+      }
+         }, [chosenSolution])
 
 
 
@@ -72,5 +70,5 @@ const check = checkSolutions(chosenSolution, correctSolutions)
     return <>GAME INPUTS DISPLAY
         {shuffledOptions.map((sol) => {
             { return <><button key={sol?.id} onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
-        })}<div><button onClick={() =>{checkSolutions(choiceRef, correctSolutions)}}>Submit</button></div></>
+        })}   </>
       };
