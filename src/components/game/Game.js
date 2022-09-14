@@ -34,10 +34,12 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     useEffect(() => {
         if (incorrectSolutions >= 4) {
             const qS = [...questions]
-            const currentQ = randomQuestion(qS)
-            setCurrentQuestion(currentQ)
-            window.alert('wrong answer')
-            setIncorrectSolutions(0)
+            const currentQ = randomQuestion(qS);
+            setCurrentQuestion(currentQ);
+            window.alert('wrong answer');
+            setIncorrectSolutions(0);
+            let arr = []
+            setChosenSolution(arr)
         } else { }
 
     }, [incorrectSolutions])

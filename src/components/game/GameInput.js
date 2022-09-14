@@ -65,12 +65,12 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
         setIncorrectSolutions(counted)
         console.log('no')
       }
-         }, [chosenSolution])
+        }, [chosenSolution])
 
 // const ok = correctSolutions.includes(el => chosenSolution.forEach(el))
 // console.log(ok)
 
-
+const found = chosenSolution.find(element => element > 10);
 
        
     return <>GAME INPUTS DISPLAY
