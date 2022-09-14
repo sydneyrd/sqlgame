@@ -1,17 +1,18 @@
-//need to get all inputs
-//randomly display correct input 
-//randomly display incorrect inputs
-// check to see if inputs match question.solution
-//on incorrect input show random failure animation decrease score
-// on correct input show success animation increase score
-//
-//when new question is presented
-//new input options are displayed
-import { useEffect, useState, useRef } from "react"
+// //need to get all inputs
+// //randomly display correct input 
+// //randomly display incorrect inputs
+// // check to see if inputs match question.solution
+// //on incorrect input show random failure animation decrease score
+// // on correct input show success animation increase score
+// //
+// //when new question is presented
+// //new input options are displayed
+// import { useEffect, useState, useRef } from "react"
+// import React from "react";
+
+
 
 export const GameInput = ({ setCompletedQuestion, solutionRef, solutionList, completedQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
-  
-
     function getRandomSolutions(arr, num) {
         const shuffled = [...arr].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);}
@@ -21,7 +22,7 @@ export const GameInput = ({ setCompletedQuestion, solutionRef, solutionList, com
     const randomSolutions = getRandomSolutions(optArr, extraSol); //creates a randomized array of the incorrect solutions, only returns enough to create 6 options - yes
     const createOptions = randomSolutions.concat(correctSolutions);//join the new extra option incorrect array, and the correct array - yes
     const shuffledOptions = getRandomSolutions(createOptions, 6);//shuffle the complete array of 6 including all the correct sol and extra incorrect as needed for 6
-    solutionRef.current = chosenSolution 
+    
     const handleSelect = (click, obj) => {
         click.preventDefault()
         updateSolutions(obj)
@@ -34,17 +35,9 @@ export const GameInput = ({ setCompletedQuestion, solutionRef, solutionList, com
         } else {
             solutionsCopy.splice(index, 1)
         }
-        setChosenSolution(solutionsCopy)
+        setChosenSolution(solutionsCopy);
+        solutionRef.current = chosenSolution 
     }
-
-
-
-    
-    // useEffect(() => {  
-    //     let arr1 = solutionRef.current
-    //     let arr2 = [...correctSolutions]
-    //     checkSolutions(arr1, arr2)
-    // }, []) 
 
 function checkSolutions(array1, array2){
   array1.sort();
@@ -70,6 +63,6 @@ function checkSolutions(array1, array2){
        
     return <>GAME INPUTS DISPLAY
         {shuffledOptions.map((sol) => {
-            { return <><button ref={solutionRef} onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
+            { return <><button key={sol?.id} onClick={(click) => {handleSelect(click, sol)}} value={sol?.id}> {sol?.label}</button></> }
         })}<div><button onClick={() =>{checkSolutions(solutionRef, correctSolutions)}}>Submit</button></div></>
-      }
+      };

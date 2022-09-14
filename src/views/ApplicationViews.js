@@ -20,9 +20,9 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
     
     <Route path="/login" element={<Login setToken={setToken} setUserId={setUserId} />} />
     <Route path="/register" element={<Register setToken={setToken} setUserId={setUserId} />} />
-    <Route path="/game" element={<GameParent />} />
+    <Route path="/game" element={<GameParent userId={userId} />} />
     <Route element={<Authorized token={token} isActive={isActive} />}>
-    <Route path="/home" element={<HomePage />} />
+    <Route path="" element={<HomePage />} />
     <Route path="/profile" element={< Profile setToken={setToken}/>} />
     
       {/* Add Routes here */}

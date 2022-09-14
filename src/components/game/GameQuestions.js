@@ -11,19 +11,16 @@
 //on 10 correct answers the difficulty should increase, get new questions
 import { useState, useRef, useEffect } from "react"
 
-export const GameQuestions = ({ question, questRef }) => {
-useEffect(() => {
-setQuestRef(questRef, question)
-    }, [] )
-// const [usedQuestions, setUsedQuestions] = useState([]) filter these out of available q
-  function setQuestRef(r, q) {
-r.current = q
-console.log(r)
-  }
-
-
-
+export const GameQuestions = ({  currentQuestion }) => {
+// useEffect(() => {
+// setQuestRef(questRef, question)
+//     }, [] )
+// // const [usedQuestions, setUsedQuestions] = useState([]) filter these out of available q
+//   function setQuestRef(r, q) {
+// r.current = q
+// console.log(r)
+//   }
     return <>HERE IS WHERE GAME QUESTIONS WILL BE DISPLAYED
- <><div>{question?.label}</div></>
+ <><div>{currentQuestion?.label}</div></>
     </>
 }

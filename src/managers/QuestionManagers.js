@@ -40,7 +40,7 @@ export const getAllQuestions = () => {
     return fetch(`http://localhost:8000/questions?difficulty=${difficulty}`, {
       headers: {
         'Authorization': `Token ${localStorage.getItem('auth_token')}`
-      }
+      },
     })
       .then(res => res.json())
   }
