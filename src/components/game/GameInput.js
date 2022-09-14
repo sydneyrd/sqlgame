@@ -12,7 +12,7 @@ import { useEffect, useState, useRef } from "react"
 
 
 
-export const GameInput = ({ setCompletedQuestion, choiceRef, solutionList, solveRef,completedQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorrectSolutions, choiceRef, solutionList, completedQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
     function getRandomSolutions(arr, num) {
         const shuffled = [...arr].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, num);}
@@ -54,15 +54,21 @@ export const GameInput = ({ setCompletedQuestion, choiceRef, solutionList, solve
        }
 
        useEffect(() => {
-        if (areEqual(chosenSolution, correctSolutions))
-        {setCompletedQuestion(true)
-      console.log('yes') } else {
+        if (chosenSolution.length && areEqual(chosenSolution, correctSolutions))
+        {setCompletedQuestion(true) 
+          setIncorrectSolutions(0)
+      } else if ( chosenSolution.length && chosenSolution.some(r=> correctSolutions.indexOf(r) >= 0)){
+      } else {
         setCompletedQuestion(false)
+        let count = incorrectSolutions
+        let counted = count + 1
+        setIncorrectSolutions(counted)
         console.log('no')
       }
          }, [chosenSolution])
 
-
+// const ok = correctSolutions.includes(el => chosenSolution.forEach(el))
+// console.log(ok)
 
 
 

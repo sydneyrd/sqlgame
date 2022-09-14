@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react"
 export const GamePage = ({userId, questions, solutionList}) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
+    const [incorrectSolutions, setIncorrectSolutions] = useState(0)
     const [chosenSolution, setChosenSolution] = useState([])//no input on render
     const [correctSolutions, setCorrectSolutions] = useState([])//not loading on rerender
     const [currentQuestion, setCurrentQuestion] = useState({})//not loading on rerender
@@ -30,6 +31,30 @@ useEffect(() => {
             setCorrectSolutions(Arr)
     } else {}
     }, [currentQuestion])
+
+    useEffect(()=>{
+        if (incorrectSolutions >= 4){
+            const qS = [ ...questions ]
+        const currentQ = randomQuestion(qS)
+        setCurrentQuestion(currentQ)
+        window.alert('wrong answer')
+        setIncorrectSolutions(0)
+        } else {}
+
+    },[incorrectSolutions])
+
+    useEffect(()=> {
+        if (completedQuestion){
+            const qS = [ ...questions ]
+            const currentQ = randomQuestion(qS)
+            setCurrentQuestion(currentQ)
+            window.alert('right answer yay')
+            setCompletedQuestion(false)
+            let arr = []
+            setChosenSolution(arr)
+            setIncorrectSolutions(0)
+        } else {}
+    }, [completedQuestion])
     
 
 
@@ -37,7 +62,7 @@ useEffect(() => {
         <div>
             <GameQuestions currentQuestion={currentQuestion} /></div>
         <div>
-            <GameInput solveRef={solveRef} choiceRef={choiceRef} completedQuestion={completedQuestion}setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} 
+            <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions}choiceRef={choiceRef} completedQuestion={completedQuestion}setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} 
             currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
 }
 
