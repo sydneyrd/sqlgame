@@ -3,7 +3,7 @@ import { GameInput } from "./GameInput"
 import { useState, useEffect, useRef } from "react"
 
 
-export const GamePage = ({userId, questions, solutionList}) => {
+export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
     const [incorrectSolutions, setIncorrectSolutions] = useState(0)
@@ -12,40 +12,39 @@ export const GamePage = ({userId, questions, solutionList}) => {
     const [currentQuestion, setCurrentQuestion] = useState({})//not loading on rerender
     const [completedQuestion, setCompletedQuestion] = useState(false)// not functioning
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
-    
+
 
     useEffect(() => {
-if  (questions?.length >= 0) 
-{       const qS = [ ...questions ]
-        const currentQ = randomQuestion(qS)
-        setCurrentQuestion(currentQ)
-} else {}
-}, [questions])
-useEffect(() => {
-    if  (currentQuestion) 
-    {       
+        if (questions?.length >= 0) {
+            const qS = [...questions]
+            const currentQ = randomQuestion(qS)
+            setCurrentQuestion(currentQ)
+        } else { }
+    }, [questions])
+    useEffect(() => {
+        if (currentQuestion) {
             const Arr = []
             currentQuestion?.solution?.map(t => Arr.push(t))
             console.log(Arr)
             solveRef.current = currentQuestion?.solution
             setCorrectSolutions(Arr)
-    } else {}
+        } else { }
     }, [currentQuestion])
 
-    useEffect(()=>{
-        if (incorrectSolutions >= 4){
-            const qS = [ ...questions ]
-        const currentQ = randomQuestion(qS)
-        setCurrentQuestion(currentQ)
-        window.alert('wrong answer')
-        setIncorrectSolutions(0)
-        } else {}
+    useEffect(() => {
+        if (incorrectSolutions >= 4) {
+            const qS = [...questions]
+            const currentQ = randomQuestion(qS)
+            setCurrentQuestion(currentQ)
+            window.alert('wrong answer')
+            setIncorrectSolutions(0)
+        } else { }
 
-    },[incorrectSolutions])
+    }, [incorrectSolutions])
 
-    useEffect(()=> {
-        if (completedQuestion){
-            const qS = [ ...questions ]
+    useEffect(() => {
+        if (completedQuestion) {
+            const qS = [...questions]
             const currentQ = randomQuestion(qS)
             setCurrentQuestion(currentQ)
             window.alert('right answer yay')
@@ -53,17 +52,24 @@ useEffect(() => {
             let arr = []
             setChosenSolution(arr)
             setIncorrectSolutions(0)
-        } else {}
+            const newQ = questions.filter(function (item) {
+                return item?.id !== currentQuestion?.id
+            })
+            setQuestions(newQ)
+        } else { }
     }, [completedQuestion])
-    
+
+
+
+
 
 
     return <><h1>Game goes here bb</h1>
         <div>
             <GameQuestions currentQuestion={currentQuestion} /></div>
         <div>
-            <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions}choiceRef={choiceRef} completedQuestion={completedQuestion}setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions} 
-            currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
+            <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
+                currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
 }
 
 

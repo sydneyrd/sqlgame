@@ -25,6 +25,6 @@ export const GameParent = ({ userId }) => {
 
 
 
-  return <><GamePage questions={questions} solutionList={solutionList} user={user} /></>
+  return <><GamePage setQuestions={setQuestions} questions={questions} solutionList={solutionList} user={user} /></>
 
 };
