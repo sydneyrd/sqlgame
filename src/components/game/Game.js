@@ -7,13 +7,11 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
     const [incorrectSolutions, setIncorrectSolutions] = useState(0)
-    const [chosenSolution, setChosenSolution] = useState([])//no input on render
-    const [correctSolutions, setCorrectSolutions] = useState([])//not loading on rerender
-    const [currentQuestion, setCurrentQuestion] = useState({})//not loading on rerender
-    const [completedQuestion, setCompletedQuestion] = useState(false)// not functioning
+    const [chosenSolution, setChosenSolution] = useState([])
+    const [correctSolutions, setCorrectSolutions] = useState([])
+    const [currentQuestion, setCurrentQuestion] = useState({})
+    const [completedQuestion, setCompletedQuestion] = useState(false)
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
-
-
     useEffect(() => {
         if (questions?.length >= 0) {
             const qS = [...questions]
@@ -33,31 +31,31 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
 
     useEffect(() => {
         if (incorrectSolutions >= 4) {
-            const qS = [...questions]
+            const qS = [...questions];
             const currentQ = randomQuestion(qS);
             setCurrentQuestion(currentQ);
             window.alert('wrong answer');
             setIncorrectSolutions(0);
-            let arr = []
-            setChosenSolution(arr)
+            const arr = [];
+            setChosenSolution(arr);
         } else { }
 
     }, [incorrectSolutions])
 
     useEffect(() => {
         if (completedQuestion) {
-            const qS = [...questions]
-            const currentQ = randomQuestion(qS)
-            setCurrentQuestion(currentQ)
-            window.alert('right answer yay')
-            setCompletedQuestion(false)
-            let arr = []
-            setChosenSolution(arr)
-            setIncorrectSolutions(0)
-            const newQ = questions.filter(function (item) {
+            const qS = [...questions];
+            window.alert('right answer yay');
+            setCompletedQuestion(false);
+            const arr = [];
+            setChosenSolution(arr);
+            setIncorrectSolutions(0);
+            const newQ = qS.filter(function (item) {
                 return item?.id !== currentQuestion?.id
-            })
-            setQuestions(newQ)
+            });
+            const currentQ = randomQuestion(qS);
+            setCurrentQuestion(currentQ);
+            setQuestions(newQ);
         } else { }
     }, [completedQuestion])
 
