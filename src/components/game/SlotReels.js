@@ -8,6 +8,9 @@ export const Slots = () => {
   const spinner = useRef()
   const reseter = useRef()
   useEffect(() => {
+    init()
+  }, [])
+  useEffect(() => {
     spin()
     }, [spinner])
 
