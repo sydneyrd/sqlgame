@@ -3,6 +3,7 @@ import { GameInput } from "./GameInput"
 import { useState, useEffect, useRef } from "react"
 
 
+
 export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
@@ -69,7 +70,8 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
             <GameQuestions currentQuestion={currentQuestion} /></div>
         <div>
             <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
-                currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div></>
+                currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
+                 </>
 }
 
 

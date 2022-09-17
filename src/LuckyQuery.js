@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { ApplicationViews } from "./views/ApplicationViews"
 import { NavBar } from "./components/navbar/NavBar"
-
+import { useRef } from "react"
 
 
 export const LuckyQuery = () => {
   const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
   const [userId, setUserIdState] = useState(localStorage.getItem('user_id'))
+
 
   const setToken = (newToken) => {
     localStorage.setItem('auth_token', newToken)
