@@ -10,6 +10,8 @@ export const Slots = () => {
   useEffect(() => {
     if (spinner)
     init()
+    else if (reseter)
+    init()
     else {}
   }, [])
   useEffect(() => {
@@ -20,8 +22,6 @@ export const Slots = () => {
       init()
       }, [reseter])
 
-
-  
     const items = [
       '🍭',
       '❌',

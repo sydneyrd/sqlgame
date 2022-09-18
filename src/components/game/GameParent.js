@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom'
 import { Slots } from './SlotReels'
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
+// import './game.css'
 
 
 export const GameParent = ({ userId }) => {
