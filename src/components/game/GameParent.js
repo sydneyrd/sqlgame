@@ -19,7 +19,13 @@ export const GameParent = ({ userId }) => {
   const loadSolutions = () => getAllSolutions().then(data => setSolutionList(data)) 
   const gameRef = useRef()
  const [isOpen, setIsOpen] = useState(false);
+ const [score, setScore] = useState(0)
   useEffect(() => {
+  if (user) {
+    for (i, i = 0, (i = 1 + 100)){
+
+    }
+  }
     loadQuestions(1)
     loadUser(userId)
     loadSolutions()
@@ -30,7 +36,7 @@ export const GameParent = ({ userId }) => {
   }
  
 
-  return <><GamePage setQuestions={setQuestions} questions={questions} solutionList={solutionList} user={user} />
+  return <>
 <input
       type="button"
       value="Click to view ERD"
@@ -41,10 +47,13 @@ export const GameParent = ({ userId }) => {
 {isOpen && <Popup
       content={<>
         <b>Design your Popup</b>
-        {/* <img src="ERD" alt="erd"/> */}
       </>}
       handleClose={togglePopup}
     />}
+ <GamePage setQuestions={setQuestions} score={score} setScore={setScore} questions={questions} solutionList={solutionList} user={user} />
+ 
+ 
+ 
  </>
 
 };

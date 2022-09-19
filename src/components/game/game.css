@@ -1,4 +1,9 @@
-#slots {
+/* #slot {
+  display: flex;
+  flex-direction: column;
     background-image: url("/home/fredney/workspace/sql-client/src/assets/slotonly.png");
-
-  }
+    background-color: transparent;
+    background-repeat: no-repeat;
+    height: 35em;
+    background-size: cover;
+  } */

@@ -2,10 +2,11 @@ import { GameQuestions } from "./GameQuestions"
 import { GameInput } from "./GameInput"
 import { useState, useEffect, useRef } from "react"
 import { Slots } from './SlotReels'
+import { WinningSlots } from './Slot'
 
 
 
-export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
+export const GamePage = ({ user, setQuestions, questions, solutionList, score, setScore }) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
     const [incorrectSolutions, setIncorrectSolutions] = useState(0)
@@ -13,6 +14,8 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     const [correctSolutions, setCorrectSolutions] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState({})
     const [completedQuestion, setCompletedQuestion] = useState(false)
+    const [winLoss, setWinLoss] = useState(false)
+    
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
     useEffect(() => {
         if (questions?.length >= 0) {
@@ -33,9 +36,12 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
 
     useEffect(() => {
         if (incorrectSolutions >= 4) {
+            if (score > 0){ const copyScore = score - 100;
+            setScore(copyScore);} else {}
             const qS = [...questions];
             const currentQ = randomQuestion(qS);
             setCurrentQuestion(currentQ);
+            setWinLoss(false);
             window.alert('wrong answer');
             setIncorrectSolutions(0);
             const arr = [];
@@ -47,6 +53,9 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
     useEffect(() => {
         if (completedQuestion) {
             const qS = [...questions];
+            const copyScore = score + 100
+            setScore(copyScore) 
+            setWinLoss(true)//
             window.alert('right answer yay');
             setCompletedQuestion(false);
             const arr = [];
@@ -72,7 +81,12 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
         <div>
             <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
-                  <div id="slot"> <Slots completedQuestion={completedQuestion}  incorrectSolutions={incorrectSolutions}/>
+                  <div id="slot"><div>{score}</div> 
+                  
+                  
+                  { !completedQuestion ?  
+            <Slots  winLoss={winLoss} setWinLoss={setWinLoss}/>
+        : <WinningSlots completedQuestion={completedQuestion} winLoss={winLoss} setWinLoss={setWinLoss}/>}
    </div></>
 }
 

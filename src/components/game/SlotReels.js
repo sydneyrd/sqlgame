@@ -4,9 +4,18 @@ import { useRef } from "react";
 
 
 
-export const Slots = ({completedQuestion, incorrectSolutions}) => {
+export const Slots = ({completedQuestion, incorrectSolutions, winLoss}) => {
   const spinner = useRef()
   const reseter = useRef()
+
+  // useEffect(() => {
+  // if (!winLoss)
+  // spin();
+  //   }, [ winLoss ])
+
+
+
+
   useEffect(() => {
     if (spinner)
     init()
@@ -22,12 +31,12 @@ export const Slots = ({completedQuestion, incorrectSolutions}) => {
       init()
       }, [reseter])
 
-      useEffect(() => {
-        if (completedQuestion){ spin();}
-        else { }
+      // useEffect(() => {
+      //   if (completedQuestion === true ){ spin(); init(); }
+      //   else { }
         
         
-      }, [completedQuestion])
+      // }, [completedQuestion])
 
     const items = [
       '🍭',
@@ -91,7 +100,8 @@ export const Slots = ({completedQuestion, incorrectSolutions}) => {
             { once: true }
           );
         }
-  
+    
+
         for (let i = pool.length - 1; i >= 0; i--) {
           const box = document.createElement('div');
           box.classList.add('box');
@@ -119,14 +129,26 @@ export const Slots = ({completedQuestion, incorrectSolutions}) => {
   
 function shuffle([...arr]) {
   let m = arr.length;
-  while (m) {
-    const i = Math.floor(Math.random() * m--);
+  
+   while (m) {
+  const i = Math.floor(Math.random() * m--); 
     [arr[m], arr[i]] = [arr[i], arr[m]];
   }
   return arr;
 }
-  
-    init();
+
+// function shuffle([...arr]){
+//   let m = arr.length;
+//     const i = Math.floor(Math.random() * m);
+//     [arr[i], arr[i]] = [arr[i], arr[i]];
+    
+//     return arr;
+//   } 
+
+
+
+  init();
+
   
 
 

@@ -1,4 +1,5 @@
 import React from "react";
+import './erd.css'
  
 const Popup = props => {
   return (
