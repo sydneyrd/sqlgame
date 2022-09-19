@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 
 
-export const Slots = () => {
+export const Slots = ({completedQuestion, incorrectSolutions}) => {
   const spinner = useRef()
   const reseter = useRef()
   useEffect(() => {
@@ -21,6 +21,13 @@ export const Slots = () => {
     useEffect(() => {
       init()
       }, [reseter])
+
+      useEffect(() => {
+        if (completedQuestion){ spin();}
+        else { }
+        
+        
+      }, [completedQuestion])
 
     const items = [
       '🍭',
@@ -39,7 +46,7 @@ export const Slots = () => {
       '🖕',
     ];
     const doors = document.querySelectorAll('.door');
-    
+
     // document.querySelector('#spinner').addEventListener('click', spin);
     // document.querySelector('#reseter').addEventListener('click', init);
   
@@ -110,14 +117,14 @@ export const Slots = () => {
       }
     }
   
-    function shuffle([...arr]) {
-      let m = arr.length;
-      while (m) {
-        const i = Math.floor(Math.random() * m--);
-        [arr[m], arr[i]] = [arr[i], arr[m]];
-      }
-      return arr;
-    }
+function shuffle([...arr]) {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr;
+}
   
     init();
   
@@ -150,3 +157,23 @@ export const Slots = () => {
   </div>
 </div>
 }
+
+
+
+
+// function shuffle([...arr]) {
+//   let m = arr.length;
+// if (incorrectSolutions >= 4){
+//   while (m) {
+//     const i = Math.floor(Math.random() * m--);
+//     [arr[m], arr[i]] = [arr[i], arr[m]];
+//   }
+//   return arr;}
+// else if (completedQuestion ==true){
+// while (m) {
+//     const i = Math.floor(Math.random() * m);
+//     [arr[i], arr[i]] = [arr[i], arr[i]];
+//   }
+//   return arr;}
+//   else {}
+// }

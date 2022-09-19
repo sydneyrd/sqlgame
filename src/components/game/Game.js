@@ -1,6 +1,7 @@
 import { GameQuestions } from "./GameQuestions"
 import { GameInput } from "./GameInput"
 import { useState, useEffect, useRef } from "react"
+import { Slots } from './SlotReels'
 
 
 
@@ -71,7 +72,8 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList }) => {
         <div>
             <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
-                 </>
+                  <div id="slot"> <Slots completedQuestion={completedQuestion}  incorrectSolutions={incorrectSolutions}/>
+   </div></>
 }
 
 
