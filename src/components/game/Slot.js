@@ -151,10 +151,10 @@ return <div id="app">
     </div>
   </div>
 
-  <div class="buttons">
+  {/* <div class="buttons">
     <button ref={spinner} onClick={(click) => { spin() }} id="spinner">Play</button>
     <button ref={reseter} onClick={(click) => { init() }} id="reseter">Reset</button>
-  </div>
+  </div> */}
 </div>
 }
 

@@ -56,20 +56,22 @@ setScore(user.score)//
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
-  return <>
-    <input
+
+  // h1>Lucky Queries</h1>
+  return <><div className="parent_erd">
+    <input className="erd_button"
       type="button"
       value="Click to view ERD"
       onClick={togglePopup}
-    />
+    /></div>
 
 
     {isOpen && <Popup
       content={<>
-        <b>Design your Popup</b>
       </>}
       handleClose={togglePopup}
     />}
+
     <GamePage setQuestions={setQuestions} score={score} setScore={setScore} questions={questions} solutionList={solutionList} userId={userId} />
 
 

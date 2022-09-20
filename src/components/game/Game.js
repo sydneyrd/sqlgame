@@ -49,6 +49,9 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
             setIncorrectSolutions(0);
             const arr = [];
             setChosenSolution(arr);
+            // let currentScore =
+            // {"score" : score}
+            // updateScore(userId, currentScore)
         } else { }
     }, [incorrectSolutions])
 
@@ -85,16 +88,16 @@ let currentScore =
 
 
 
-    return <><h1>Game goes here bb</h1>
-        <div>
+    return <>
+        <div className="parent_question_box">
             <GameQuestions currentQuestion={currentQuestion} /></div>
-        <div>
+      <div className="parent_solution_slot">  <div className="parent_solution_box">
             <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
-                  <div id="slot"><div>{score}</div> 
+                <div className="slot">  <div id="slot_score">{score}</div> 
                   
-        <WinningSlots winLoss={winLoss} setWinLoss={setWinLoss}/>
-   </div></>
+       <div className="slot_animate"> <WinningSlots winLoss={winLoss} setWinLoss={setWinLoss}/></div>
+   </div></div></>
 }
 
 

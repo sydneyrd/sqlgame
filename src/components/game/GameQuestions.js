@@ -20,7 +20,7 @@ export const GameQuestions = ({  currentQuestion }) => {
 // r.current = q
 // console.log(r)
 //   }
-    return <>HERE IS WHERE GAME QUESTIONS WILL BE DISPLAYED
- <><div>{currentQuestion?.label}</div></>
+    return <>
+ <><div className="question_box">{currentQuestion?.label}</div></>
     </>
 }

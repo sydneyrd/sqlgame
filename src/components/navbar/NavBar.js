@@ -42,7 +42,7 @@ export const NavBar = ({ isStaff, token, setToken }) => {
                     <Link to="/questions" className="navbar-item">Question Management</Link>  
                     <Link to="/users" className="navbar-item">User Management</Link>
                     <Link to="/solutions" className="navbar-item">Solution Management</Link> 
-                    <Link to="/image" className="navbar-item">Image Management</Link>
+                    {/* <Link to="/image" className="navbar-item">Image Management</Link> */}
                     </>
                     : ""
                   }     
