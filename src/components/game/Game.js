@@ -1,5 +1,6 @@
 import { GameQuestions } from "./GameQuestions"
 import { GameInput } from "./GameInput"
+import { updateScore } from "../../managers/UserManagers"
 import { useState, useEffect, useRef, forwardRef } from "react"
 import { Slots } from './SlotReels'
 import { WinningSlots } from './Slot'
@@ -8,7 +9,7 @@ import { WinningSlots } from './Slot'
 
 
 
-export const GamePage = ({ user, setQuestions, questions, solutionList, score, setScore }) => {
+export const GamePage = ({ userId, setQuestions, questions, solutionList, score, setScore }) => {
     const solveRef = useRef([])
     const choiceRef = useRef([])
     const [incorrectSolutions, setIncorrectSolutions] = useState(0)
@@ -69,7 +70,17 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             setCurrentQuestion(currentQ);
             setQuestions(newQ);
         } else { }
+let currentScore = 
+   {"score" : score}
+   updateScore(userId, currentScore)
+
+
     }, [completedQuestion])
+
+//       useEffect(() => {
+   
+
+//   }, [completedQuestion])
 
 
 

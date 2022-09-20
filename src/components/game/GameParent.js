@@ -1,12 +1,13 @@
 import { GamePage } from "./Game"
 import React from "react";
 import { getQuestionsByDifficulty } from "../../managers/QuestionManagers"
-import { getUserById } from "../../managers/UserManagers"
+import { getUserById, updateScore } from "../../managers/UserManagers"
 import { getAllSolutions } from "../../managers/SolutionManagers"
 import { useEffect, useState, useRef } from "react"
 import { render } from "react-dom";
 import ReactDOM from 'react-dom'
 import Popup from './Erd';
+
 import './game.css'
 
 
@@ -27,7 +28,7 @@ export const GameParent = ({ userId }) => {
   }, [])
 
   useEffect(() => {
-
+setScore(user.score)//
     let diff = user.score
     console.log(user.score)
     if (diff > 1000) {
@@ -69,7 +70,7 @@ export const GameParent = ({ userId }) => {
       </>}
       handleClose={togglePopup}
     />}
-    <GamePage setQuestions={setQuestions} score={score} setScore={setScore} questions={questions} solutionList={solutionList} user={user} />
+    <GamePage setQuestions={setQuestions} score={score} setScore={setScore} questions={questions} solutionList={solutionList} userId={userId} />
 
 
 

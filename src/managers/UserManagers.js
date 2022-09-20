@@ -41,6 +41,18 @@ export const updateUserAdmin = (id, user) => {
         })
 }
 
+
+export const updateScore = (id, score) => {
+    return fetch(`http://localhost:8000/users/${id}/change_score`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Token ${localStorage.getItem('auth_token')}`
+        },
+        body: JSON.stringify(score)
+    }).then(res => res.json()) 
+}
+
 export const deleteUser = (userId) => {
     return fetch(`http://localhost:8000/users/${userId}`, {
       method: "DELETE",
