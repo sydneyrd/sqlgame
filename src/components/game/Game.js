@@ -16,7 +16,7 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
     const [correctSolutions, setCorrectSolutions] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState({})
     const [completedQuestion, setCompletedQuestion] = useState(false)
-    const [winLoss, setWinLoss] = useState(false)
+    const [winLoss, setWinLoss] = useState(null)
     
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
     useEffect(() => {
@@ -49,7 +49,6 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             const arr = [];
             setChosenSolution(arr);
         } else { }
-
     }, [incorrectSolutions])
 
     useEffect(() => {
@@ -59,7 +58,6 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             setScore(copyScore) 
             setWinLoss(true)//
             // window.alert('right answer yay');
-            // winSpinRef.current.getWin();
             setCompletedQuestion(false);
             const arr = [];
             setChosenSolution(arr);
@@ -72,9 +70,8 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             setQuestions(newQ);
         } else { }
     }, [completedQuestion])
-    
-const SpinRef = useRef();
-const winSpinRef = useRef();
+
+
 
 
     return <><h1>Game goes here bb</h1>
@@ -85,10 +82,7 @@ const winSpinRef = useRef();
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
                   <div id="slot"><div>{score}</div> 
                   
-                  
-                  {/* { !completedQuestion ?  
-            <Slots ref={SpinRef} winLoss={winLoss} setWinLoss={setWinLoss}/> */}
-        <WinningSlots ref={winSpinRef} completedQuestion={completedQuestion} winLoss={winLoss} setWinLoss={setWinLoss}/>
+        <WinningSlots winLoss={winLoss} setWinLoss={setWinLoss}/>
    </div></>
 }
 

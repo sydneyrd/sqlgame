@@ -59,7 +59,7 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
       setCompletedQuestion(true)
       setIncorrectSolutions(0)
     } else if (chosenSolution.length && chosenSolution.some(r => correctSolutions.indexOf(r) >= 0)) {
-    } else if (incorrectSolutions == 4) {
+    } else if (incorrectSolutions === 4) {
       setIncorrectSolutions(0);
       setCompletedQuestion(false);
       const arr = [];
