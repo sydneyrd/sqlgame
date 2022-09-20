@@ -1,34 +1,55 @@
 
 import { useEffect } from "react";
+import React from "react";
 import './slot.css'
 import { useRef } from "react";
+import { forwardRef, useImperativeHandle } from "react";
+// const { forwardRef, useRef, useImperativeHandle } = React;
 
 
-
-export const WinningSlots = ({completedQuestion, incorrectSolutions}) => {
+ export const WinningSlots = ({completedQuestion, incorrectSolutions, winLoss, ref}) => {
   const spinner = useRef()
   const reseter = useRef()
+
+  
   useEffect(() => {
-    if (spinner)
     init()
-    else if (reseter)
-    init()
-    else {}
-  }, [])
-  useEffect(() => {
     spin()
-    }, [spinner])
+    }, [winLoss])
 
-    useEffect(() => {
-      init()
-      }, [reseter])
+  // useEffect(() => {
+  //   init()
+  //   }, [reseter])
+  // useEffect(() => {
+  //   if (spinner)
+  //   init()
+  //   else if (reseter)
+  //   init()
+  //   else {}
+  // }, [])
+  // useEffect(() => {
+  //   spin()
+  //   }, [spinner])
 
-      useEffect(() => {
-        if (completedQuestion === true ){ spin(); init(); }
-        else { }
+  //   useEffect(() => {
+  //     init()
+  //     }, [reseter])
+
+      // useEffect(() => {
+      //   if (completedQuestion === true ){ spin(); init(); }
+      //   else { }
         
         
-      }, [completedQuestion])
+      // }, [completedQuestion])
+
+
+   
+      useImperativeHandle(ref, () => ({
+        getWin() {
+          init();
+          spin();
+        }
+      })); 
 
     const items = [
       '🍭',
@@ -109,6 +130,11 @@ export const WinningSlots = ({completedQuestion, incorrectSolutions}) => {
       }
     }
   
+
+  
+
+
+
     async function spin() {
       init(false, 1, 2);
       
@@ -140,7 +166,7 @@ function shuffle([...arr]){
 
 
 
-  init();
+  // init();
 
   
 

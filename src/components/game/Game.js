@@ -1,8 +1,10 @@
 import { GameQuestions } from "./GameQuestions"
 import { GameInput } from "./GameInput"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, forwardRef } from "react"
 import { Slots } from './SlotReels'
 import { WinningSlots } from './Slot'
+
+
 
 
 
@@ -56,7 +58,8 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             const copyScore = score + 100
             setScore(copyScore) 
             setWinLoss(true)//
-            window.alert('right answer yay');
+            // window.alert('right answer yay');
+            // winSpinRef.current.getWin();
             setCompletedQuestion(false);
             const arr = [];
             setChosenSolution(arr);
@@ -69,10 +72,9 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
             setQuestions(newQ);
         } else { }
     }, [completedQuestion])
-
-
-
-
+    
+const SpinRef = useRef();
+const winSpinRef = useRef();
 
 
     return <><h1>Game goes here bb</h1>
@@ -84,9 +86,9 @@ export const GamePage = ({ user, setQuestions, questions, solutionList, score, s
                   <div id="slot"><div>{score}</div> 
                   
                   
-                  { !completedQuestion ?  
-            <Slots  winLoss={winLoss} setWinLoss={setWinLoss}/>
-        : <WinningSlots completedQuestion={completedQuestion} winLoss={winLoss} setWinLoss={setWinLoss}/>}
+                  {/* { !completedQuestion ?  
+            <Slots ref={SpinRef} winLoss={winLoss} setWinLoss={setWinLoss}/> */}
+        <WinningSlots ref={winSpinRef} completedQuestion={completedQuestion} winLoss={winLoss} setWinLoss={setWinLoss}/>
    </div></>
 }
 

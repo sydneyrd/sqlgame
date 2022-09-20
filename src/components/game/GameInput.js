@@ -78,7 +78,6 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
 
   const found = chosenSolution.find(element => element > 10);
 
-
   return <>GAME INPUTS DISPLAY
     {shuffledOptions.map((sol) => {
       { return <><button key={sol?.id} onClick={(click) => { handleSelect(click, sol) }} value={sol?.id}> {sol?.label}</button></> }
