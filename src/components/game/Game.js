@@ -18,6 +18,7 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
     const [currentQuestion, setCurrentQuestion] = useState({})
     const [completedQuestion, setCompletedQuestion] = useState(false)
     const [winLoss, setWinLoss] = useState(null)
+    const [counter, setCounter] = useState(0)
     
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
     useEffect(() => {
@@ -38,20 +39,21 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
     }, [currentQuestion])
 
     useEffect(() => {
-        if (incorrectSolutions >= 4) {
+        if (incorrectSolutions >= 2) {
             if (score > 0){ const copyScore = score - 100;
             setScore(copyScore);} else {}
             const qS = [...questions];
             const currentQ = randomQuestion(qS);
             setCurrentQuestion(currentQ);
             setWinLoss(false);
+            setCounter(counter+1)
             window.alert('wrong answer');
             setIncorrectSolutions(0);
             const arr = [];
             setChosenSolution(arr);
-            // let currentScore =
-            // {"score" : score}
-            // updateScore(userId, currentScore)
+            let currentScore =
+            {"score" : score}
+            updateScore(userId, currentScore)
         } else { }
     }, [incorrectSolutions])
 
@@ -60,7 +62,8 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
             const qS = [...questions];
             const copyScore = score + 100
             setScore(copyScore) 
-            setWinLoss(true)//
+            setWinLoss(true)
+            setCounter(counter+1)//
             // window.alert('right answer yay');
             setCompletedQuestion(false);
             const arr = [];
@@ -92,12 +95,12 @@ let currentScore =
         <div className="parent_question_box">
             <GameQuestions currentQuestion={currentQuestion} /></div>
       <div className="parent_solution_slot">  <div className="parent_solution_box">
-            <GameInput incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
+            <GameInput setWinLoss={setWinLoss}incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
-                <div className="slot">  <div id="slot_score">{score}</div> 
+                   
                   
-       <div className="slot_animate"> <WinningSlots winLoss={winLoss} setWinLoss={setWinLoss}/></div>
-   </div></div></>
+       <div className="slot_animate"><div id="slot_score">{score}</div> <WinningSlots counter={counter} winLoss={winLoss} setWinLoss={setWinLoss}/></div>
+   </div></>
 }
 
 

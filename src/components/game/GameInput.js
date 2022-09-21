@@ -12,7 +12,7 @@ import { useEffect, useState, useRef } from "react"
 
 
 
-export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorrectSolutions, choiceRef, solutionList, completedQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
+export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorrectSolutions, setWinLoss, choiceRef, solutionList, completedQuestion, chosenSolution, setChosenSolution, correctSolutions }) => {
   function getRandomSolutions(arr, num) {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
@@ -59,12 +59,13 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
       setCompletedQuestion(true)
       setIncorrectSolutions(0)
     } else if (chosenSolution.length && chosenSolution.some(r => correctSolutions.indexOf(r) >= 0)) {
-    } else if (incorrectSolutions === 4) {
+    } else if (incorrectSolutions >= 2) {
       setIncorrectSolutions(0);
       setCompletedQuestion(false);
       const arr = [];
       setChosenSolution(arr);
-    } else {
+      setWinLoss(false)
+     } else {
       setCompletedQuestion(false)
       let count = incorrectSolutions
       let counted = count + 1

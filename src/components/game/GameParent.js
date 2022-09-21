@@ -28,25 +28,25 @@ export const GameParent = ({ userId }) => {
   }, [])
 
   useEffect(() => {
-setScore(user.score)//
+    setScore(user.score)//
     let diff = user.score
     console.log(user.score)
     if (diff > 1000) {
       loadQuestions(10)
-      
+
     }
     else {
       for (let j = 100; j < 1000; j += 100) {
         if (diff < j) {
           let i = (j / 100);
-          setDifficulty(i)  
+          setDifficulty(i)
           loadQuestions(i)
           break
         }
         else { }
       }
     }
-  
+
   }, [user])
 
 

@@ -50,7 +50,7 @@ export const updateScore = (id, score) => {
             'Authorization': `Token ${localStorage.getItem('auth_token')}`
         },
         body: JSON.stringify(score)
-    }).then(res => res.json()) 
+    })
 }
 
 export const deleteUser = (userId) => {

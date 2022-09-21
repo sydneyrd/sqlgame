@@ -7,7 +7,7 @@ import { forwardRef, useImperativeHandle } from "react";
 // const { forwardRef, useRef, useImperativeHandle } = React;
 
 
-export const WinningSlots = ({ winLoss, setWinLoss }) => {
+export const WinningSlots = ({ winLoss, counter, setWinLoss }) => {
   const spinner = useRef()
   const reseter = useRef()
 
@@ -19,7 +19,7 @@ export const WinningSlots = ({ winLoss, setWinLoss }) => {
     }
     else if (winLoss === false);
     { init(); spin() }    
-    }, [winLoss])
+    }, [winLoss, counter])
 
 const items = [
   '🍭',
@@ -112,7 +112,7 @@ async function spin() {
   }
 }
 function shuffle([...arr]) {
-  let m = arr.length;
+  let m = arr.length -1;
   const i = Math.floor(Math.random() * m);
   [arr[i], arr[i]] = [arr[i], arr[i]];
 
@@ -121,9 +121,9 @@ function shuffle([...arr]) {
 
 
 function shuffleLoss([...arr]) {
-  let m = arr.length;
+  let m = arr.length -1;
   while (m) {
-    const i = Math.floor(Math.random() * m--);
+    const i = Math.floor(Math.random() * m);
     [arr[m], arr[i]] = [arr[i], arr[m]];
   }
   return arr;
