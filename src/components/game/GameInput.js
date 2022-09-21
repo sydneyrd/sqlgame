@@ -59,7 +59,7 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
       setCompletedQuestion(true)
       setIncorrectSolutions(0)
     } else if (chosenSolution.length && chosenSolution.some(r => correctSolutions.indexOf(r) >= 0)) {
-    } else if (incorrectSolutions == 4) {
+    } else if (incorrectSolutions === 4) {
       setIncorrectSolutions(0);
       setCompletedQuestion(false);
       const arr = [];
@@ -78,9 +78,8 @@ export const GameInput = ({ setCompletedQuestion, incorrectSolutions, setIncorre
 
   const found = chosenSolution.find(element => element > 10);
 
-
-  return <>GAME INPUTS DISPLAY
+  return <>
     {shuffledOptions.map((sol) => {
-      { return <><button key={sol?.id} onClick={(click) => { handleSelect(click, sol) }} value={sol?.id}> {sol?.label}</button></> }
+      { return <><button className="solution_button" key={sol?.id} onClick={(click) => { handleSelect(click, sol) }} value={sol?.id}> {sol?.label}</button></> }
     })}   </>
 };

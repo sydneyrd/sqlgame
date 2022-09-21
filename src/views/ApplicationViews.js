@@ -13,6 +13,7 @@ import {QuestionForm} from "../components/questions/QuestionForm"
 import {QuestionDetails} from "../components/questions/QuestionDetails"
 import { SolutionList } from "../components/questions/SolutionList"
 import {SolutionEdit} from "../components/questions/SolutionEdit"
+import { Image } from "../components/image/Image"
 
 
 export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, isActive }) => {
@@ -42,6 +43,7 @@ export const ApplicationViews = ({ isStaff, token, setToken, setUserId, userId, 
       {
           isStaff === true
             ? <>
+            <Route path='/image' element={<Image/>} />
             <Route path='/solutions' index element={< SolutionList />} />
                 <Route path='/solutions/edit/:solutionId' element={< SolutionEdit />} />
             <Route path="/users">
