@@ -2,14 +2,14 @@
 import { useEffect } from "react";
 import React from "react";
 import './slot.css'
-import { useRef } from "react";
-import { forwardRef, useImperativeHandle } from "react";
+// import { useRef } from "react";
+// import { forwardRef, useImperativeHandle } from "react";
 // const { forwardRef, useRef, useImperativeHandle } = React;
 
 
-export const WinningSlots = ({ winLoss, counter, setWinLoss }) => {
-  const spinner = useRef()
-  const reseter = useRef()
+export const WinningSlots = ({ winLoss, counter}) => {
+  // const spinner = useRef()
+  // const reseter = useRef()
 
 
   useEffect(() => {
@@ -18,7 +18,8 @@ export const WinningSlots = ({ winLoss, counter, setWinLoss }) => {
       spin()
     }
     else if (winLoss === false);
-    { init(); spin() }    
+    { init(); spin() }  
+
     }, [winLoss, counter])
 
 const items = [

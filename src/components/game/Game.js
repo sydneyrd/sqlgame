@@ -19,7 +19,7 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
     const [completedQuestion, setCompletedQuestion] = useState(false)
     const [winLoss, setWinLoss] = useState(null)
     const [counter, setCounter] = useState(0)
-    
+
     const randomQuestion = (qt) => { return qt[Math.floor(Math.random() * qt.length)]; }
     useEffect(() => {
         if (questions?.length >= 0) {
@@ -40,19 +40,21 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
 
     useEffect(() => {
         if (incorrectSolutions >= 2) {
-            if (score > 0){ const copyScore = score - 100;
-            setScore(copyScore);} else {}
+            if (score > 0) {
+                const copyScore = score - 100;
+                setScore(copyScore);
+            } else { }
             const qS = [...questions];
             const currentQ = randomQuestion(qS);
             setCurrentQuestion(currentQ);
             setWinLoss(false);
-            setCounter(counter+1)
-            window.alert('wrong answer');
+            setCounter(counter + 1)
+            // window.alert('wrong answer');
             setIncorrectSolutions(0);
             const arr = [];
             setChosenSolution(arr);
             let currentScore =
-            {"score" : score}
+                { "score": score }
             updateScore(userId, currentScore)
         } else { }
     }, [incorrectSolutions])
@@ -61,9 +63,9 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
         if (completedQuestion) {
             const qS = [...questions];
             const copyScore = score + 100
-            setScore(copyScore) 
+            setScore(copyScore)
             setWinLoss(true)
-            setCounter(counter+1)//
+            setCounter(counter + 1)//
             // window.alert('right answer yay');
             setCompletedQuestion(false);
             const arr = [];
@@ -75,46 +77,24 @@ export const GamePage = ({ userId, setQuestions, questions, solutionList, score,
             const currentQ = randomQuestion(qS);
             setCurrentQuestion(currentQ);
             setQuestions(newQ);
+             let currentScore =
+            { "score": score }
+        updateScore(userId, currentScore)
         } else { }
-let currentScore = 
-   {"score" : score}
-   updateScore(userId, currentScore)
+       
 
 
     }, [completedQuestion])
-
-//       useEffect(() => {
-   
-
-//   }, [completedQuestion])
-
-
 
 
     return <>
         <div className="parent_question_box">
             <GameQuestions currentQuestion={currentQuestion} /></div>
-      <div className="parent_solution_slot">  <div className="parent_solution_box">
-            <GameInput setWinLoss={setWinLoss}incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
+        <div className="parent_solution_slot">  <div className="parent_solution_box">
+            <GameInput setWinLoss={setWinLoss} incorrectSolutions={incorrectSolutions} solveRef={solveRef} setIncorrectSolutions={setIncorrectSolutions} choiceRef={choiceRef} completedQuestion={completedQuestion} setCompletedQuestion={setCompletedQuestion} correctSolutions={correctSolutions}
                 currentQuestion={currentQuestion} solutionList={solutionList} chosenSolution={chosenSolution} setChosenSolution={setChosenSolution} /></div>
-                   
-                  
-       <div className="slot_animate"><div id="slot_score">{score}</div> <WinningSlots counter={counter} winLoss={winLoss} setWinLoss={setWinLoss}/></div>
-   </div></>
+
+
+            <div className="slot_animate"><div className="column"></div><div id="slot_score">{score}</div> <WinningSlots counter={counter} winLoss={winLoss} setWinLoss={setWinLoss} /></div>
+        </div></>
 }
-
-
-
-
-
-// /get difficulty from score change score into string, take first character and use that to get the difficulty, not session score, but overall score
-// get maps on the same difficulty
-// display inputs and questions (questions one at a time)// 
-// correctly answered questions should be removed from the pool of available questions
-// after 10 correct questions the difficulty should be increased
-// on difficulty increase ideally display an animation of the map increasing in size
-// the difficulty increase will get the questions attached to the next difficulty level
-// some of the logic may need to be passed instead of in the children modules
-// display main animation
-// get animations for failure and success
-// there should be a button with a pop up containing the erd the user can acc////

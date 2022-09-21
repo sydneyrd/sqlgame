@@ -81,7 +81,7 @@
 
 #slot_score{
   background: transparent;
-  grid-area: 1 / 2 / 2 / 2;
+  grid-area: 1 / 3 / 3 / 2;
 } 
 .slot_animate{
   background: transparent;
@@ -91,9 +91,24 @@
   position: relative;
   min-height:auto;
   background-size:cover;
- /* -webkit-background-origin:border; */
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: 150px 1fr;
+ -webkit-background-origin:border;
+  display: grid; 
+   display: inline-grid;
+   grid-template-columns: repeat(350px, 1fr);
+  grid-template-columns: 350px 4fr;
+  grid-template-rows: 200px 10fr;
+
+  grid-template-columns: repeat(2fr, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+
+
+  /* grid-area: 1 / 1 / 4 / 2; */
+  /* column-gap: 50px; */ 
+  /* display: grid;
+  grid-template-columns:  repeat(4, 1.5fr) 100px;
+  grid-template-rows:  repeat(5, 100px) 70px; */
+  /* grid-template-areas:
+    "hd hd hd hd   hd   hd   hd   hd   hd"
+    "sd sd sd main main main"; */
+}
   
-}  

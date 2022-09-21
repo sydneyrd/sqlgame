@@ -28,9 +28,9 @@ export const GameParent = ({ userId }) => {
   }, [])
 
   useEffect(() => {
-    setScore(user.score)//
-    let diff = user.score
-    console.log(user.score)
+    setScore(user?.score)//
+    let diff = user?.score
+    console.log(user?.score)
     if (diff > 1000) {
       loadQuestions(10)
 
